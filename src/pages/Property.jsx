@@ -210,70 +210,61 @@ const Property = () => {
       </section>
 
       <section className="property-video-walkthrough">
-        {/* Section 3: Property Video */}
-        <div className="property-video">
-          <h2>Video Tour</h2>
-          <div className="video-container">
-            <iframe
-              width="560"
-              height="315"
-              src={propertyData.video}
-              title="Property video tour"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
-
-        {/* Section 4: 3D Walkthrough */}
-        <div className="property-walkthrough">
-          <h2>3D Virtual Tour</h2>
-          <div className="walkthrough-container">
-            <iframe
-              src="https://videos.ctfassets.net/icnj41gkyohw/6sb0vVHFI4dO3KytmWDWqg/cdf4c5620537dbe0f34c975cae6f2750/homepage-ai-3.mp4"
-              title="3D Virtual Walkthrough"
-              allow="xr-spatial-tracking"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
-         {/* <div className="property-walkthrough">
-      <h2>3D Virtual Tour</h2>
-      <div className="walkthrough-container">
-        {tourError ? (
-          <div className="tour-error">
-            <div className="error-content">
-              <p>Oops, we couldn't load the 3D tour.</p>
-              <p>Please try again later or contact us for assistance.</p>
-              <div className="matterport-fallback">
-                <img 
-                  src="https://matterport.com/wp-content/themes/matterport/assets/images/logo.svg" 
-                  alt="Matterport logo" 
-                  className="matterport-logo"
-                />
-                <p>Matterport 3D Tour Not Available</p>
-              </div>
-              <button 
-                className="retry-button"
-                onClick={() => setTourError(false)}
-              >
-                Retry Loading Tour
-              </button>
+        <div className="tour-container">
+          <div className="tour-section video-tour">
+            <div className="tour-header">
+              <h2>Video Tour</h2>
+              <span className="tour-description">Take a guided video tour of the property</span>
+            </div>
+            <div className="video-container">
+              <iframe
+                src={propertyData.video}
+                title="Property video tour"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
-        ) : (
-          <iframe 
-            src={propertyData.walkthrough}
-            title="3D Virtual Walkthrough"
-            allow="xr-spatial-tracking; fullscreen"
-            allowFullScreen
-            onError={handleTourError}
-            loading="lazy"
-          />
-        )}
-      </div>
-    </div> */}
+
+          <div className="tour-section virtual-tour">
+            <div className="tour-header">
+              <h2>3D Virtual Tour</h2>
+              <span className="tour-description">Explore the property in 3D</span>
+            </div>
+            <div className="walkthrough-container">
+              {tourError ? (
+                <div className="tour-error">
+                  <div className="error-content">
+                    <i className="fas fa-exclamation-circle error-icon"></i>
+                    <h3>Oops, model not available</h3>
+                    <p>We're having trouble loading the 3D model at the moment.</p>
+                    <p>If the problem persists, please check our troubleshooting guide.</p>
+                    <div className="error-actions">
+                      <button className="retry-button" onClick={() => setTourError(false)}>
+                        Try Again
+                      </button>
+                      <button 
+                        className="troubleshoot-button" 
+                        onClick={() => window.open('/troubleshooting-guide', '_blank')}
+                      >
+                        View Troubleshooting Guide
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <iframe
+                  src={propertyData.walkthrough}
+                  title="3D Virtual Walkthrough"
+                  allow="xr-spatial-tracking"
+                  allowFullScreen
+                  onError={() => setTourError(true)}
+                />
+              )}
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
