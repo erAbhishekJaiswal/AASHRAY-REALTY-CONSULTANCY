@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/property';
+const API_URL = 'https://arc-backend-rosy.vercel.app/api/property';
 
 // Create a new property
 export const createProperty = async (propertyData) => {
